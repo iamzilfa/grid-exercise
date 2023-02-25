@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+.container{
+display:grid;
+grid-template-columns: 150px 1fr;
+grid-gap: 20px;
+}
+</style>
+
+
+<div class="container">
+<h2 onmouseover="bigImg(this)" onmouseout="normal(this)">My First Page</h2>
+<p id="demo"></p>
+</div>
+
+<script>
+document.getElementById("demo").innerHTML = "<img src=\"https://www.aspca.org/sites/default/files/blog_horse-code-part-one_011922_main.jpg\" width=\"400px\" height=\"150px\">";
+
+document.getElementById("demo").style.display = "none" ; 
+function bigImg(){
+document.getElementById("demo").style.display = "block" ;
+}
+function normal() {
+document.getElementById("demo").style.display = "none" ;
+}
+</script>
+
+</body>
+</html>
+
+<!-- ************************************************************************** -->
+
+import { useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+function diplayAbout(){
+  setSelectedTabIndex(0);
+}
+
+function diplayBlog(){
+  setSelectedTabIndex(1);
+}
+function diplayContact(){
+  setSelectedTabIndex(2);
+} 
+  function displayAbout(tabIndex){
+    if(tabIndex===0){
+        setSelectedTabIndex(0)
+    }
+    if(tabIndex===1){
+        setSelectedTabIndex(1)
+    }
+    if(tabIndex===2){
+        setSelectedTabIndex(2)       
+    }
+  }
+  function displayAboutMobile(tabIndex){
+    if(tabIndex===0){
+        if(selectedTabIndex===0){
+            setSelectedTabIndex(null)
+        }else{
+            setSelectedTabIndex(0)
+        }
+        <!-- selectedTabIndex===0?setSelectedTabIndex(null):setSelectedTabIndex(0) -->
+    }
+    if(tabIndex===1){
+        if(selectedTabIndex===1){
+            setSelectedTabIndex(null)
+        }else{
+            setSelectedTabIndex(1)
+        }
+    }
+    if(tabIndex===2){
+        if(selectedTabIndex===2){
+            setSelectedTabIndex(null)
+        }else{
+            setSelectedTabIndex(2)
+        }
+    }
+  }
+
+  return (
+    <div className="App">
+      <div class='container'>
+      <h1 onClick={diplayAbout}>About</h1>
+      <h1 onClick={diplayBlog}>Blog</h1>
+      <h1 onClick={diplayContact}>Contact</h1>
+      </div>
+      {selectedTabIndex === 0 &&  <p>About ipsum dolor sit amet, consectetur adipisicing elit. Accusantium odio et,
+amet ab libero non perferendis facilis suscipit, tempore deserunt illo veniam
+eius praesentium, eligendi natus aut corrupti eos quisquam.</p>} 
+     {selectedTabIndex === 1 && <p>Blog ipsum dolor sit amet, consectetur adipisicing elit. Accusantium odio et,
+amet ab libero non perferendis facilis suscipit, tempore deserunt illo veniam
+eius praesentium, eligendi natus aut corrupti eos quisquam.</p>}
+{selectedTabIndex === 2 && <p>Contact ipsum dolor sit amet, consectetur adipisicing elit. Accusantium odio et,
+  amet ab libero non perferendis facilis suscipit, tempore deserunt illo veniam
+  eius praesentium, eligendi natus aut corrupti eos quisquam.</p>}
+    </div>
+  );
+}
